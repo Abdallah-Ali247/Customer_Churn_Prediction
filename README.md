@@ -20,7 +20,7 @@ The app provides a **modern Bootstrap-styled interface** with radio buttons and 
 ---
 
 ## 🏗️ Project Structure
- 
+```
 Project/
 │── app.py # Flask backend
 │── model/ # Saved trained model (XGBoost JSON)
@@ -30,7 +30,7 @@ Project/
 │── requirements.txt # Python dependencies
 │── README.md # Project documentation
 │── .gitignore # Ignore unnecessary files
-
+```
 
 ---
 

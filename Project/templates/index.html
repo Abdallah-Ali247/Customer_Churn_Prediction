@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Telco Customer Churn Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .card {
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .form-label {
+      font-weight: 600;
+    }
+    small {
+      color: #666;
+    }
+    .form-check {
+      margin-right: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card p-4 col-md-8 mx-auto">
+      <h2 class="text-center mb-4">Customer Churn Prediction</h2>
+      <form method="POST">
+        
+        <!-- Tenure -->
+        <div class="mb-3">
+          <label class="form-label">Tenure (months)</label>
+          <input type="number" name="tenure" class="form-control" required>
+          <small>Example: 12, 24, 36 ...</small>
+        </div>
+
+        <!-- Monthly Charges -->
+        <div class="mb-3">
+          <label class="form-label">Monthly Charges</label>
+          <input type="number" step="0.01" name="MonthlyCharges" class="form-control" required>
+          <small>Example: 20.5, 55.75, 100.00</small>
+        </div>
+
+        <!-- Total Charges -->
+        <div class="mb-3">
+          <label class="form-label">Total Charges</label>
+          <input type="number" step="0.01" name="TotalCharges" class="form-control" required>
+          <small>Example: 300.50, 1200.00</small>
+        </div>
+
+        <!-- Contract -->
+        <div class="mb-3">
+          <label class="form-label">Contract</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Contract" value="Month-to-month" required>
+            <label class="form-check-label">Month-to-month</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Contract" value="One year">
+            <label class="form-check-label">One year</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Contract" value="Two year">
+            <label class="form-check-label">Two year</label>
+          </div>
+        </div>
+
+        <!-- Internet Service -->
+        <div class="mb-3">
+          <label class="form-label">Internet Service</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="InternetService" value="DSL" required>
+            <label class="form-check-label">DSL</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="InternetService" value="Fiber optic">
+            <label class="form-check-label">Fiber optic</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="InternetService" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <!-- Phone Service -->
+        <div class="mb-3">
+          <label class="form-label">Phone Service</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PhoneService" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PhoneService" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <!-- Streaming TV -->
+        <div class="mb-3">
+          <label class="form-label">Streaming TV</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingTV" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingTV" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingTV" value="No internet service">
+            <label class="form-check-label">No internet service</label>
+          </div>
+        </div>
+
+        <!-- Streaming Movies -->
+        <div class="mb-3">
+          <label class="form-label">Streaming Movies</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingMovies" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingMovies" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="StreamingMovies" value="No internet service">
+            <label class="form-check-label">No internet service</label>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-3">
+          <label class="form-label">Gender</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Male" required>
+            <label class="form-check-label">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Female">
+            <label class="form-check-label">Female</label>
+          </div>
+        </div>
+
+        <!-- Senior Citizen -->
+        <div class="mb-3">
+          <label class="form-label">Senior Citizen</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SeniorCitizen" value="0" required>
+            <label class="form-check-label">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="SeniorCitizen" value="1">
+            <label class="form-check-label">Yes</label>
+          </div>
+        </div>
+
+        <!-- Partner -->
+        <div class="mb-3">
+          <label class="form-label">Partner</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Partner" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Partner" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <!-- Dependents -->
+        <div class="mb-3">
+          <label class="form-label">Dependents</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Dependents" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Dependents" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <!-- Paperless Billing -->
+        <div class="mb-3">
+          <label class="form-label">Paperless Billing</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaperlessBilling" value="Yes" required>
+            <label class="form-check-label">Yes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="PaperlessBilling" value="No">
+            <label class="form-check-label">No</label>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="mb-3">
+          <label class="form-label">Payment Method</label><br>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="Credit card (automatic)" required>
+            <label class="form-check-label">Credit card (automatic)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="Electronic check">
+            <label class="form-check-label">Electronic check</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="Mailed check">
+            <label class="form-check-label">Mailed check</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="Bank transfer (automatic)">
+            <label class="form-check-label">Bank transfer (automatic)</label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary btn-lg w-100">Predict Churn</button>
+        </div>
+      </form>
+
+      {% if prediction %}
+      <div class="alert alert-info mt-4 text-center">
+        <h5>Prediction: {{ prediction }}</h5>
+        <!-- <p>Probability: {{ prob }}</p> -->
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
